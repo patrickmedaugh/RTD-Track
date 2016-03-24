@@ -1,0 +1,11 @@
+{
+  "name": "rtd-track",
+  "version": "1.0.0",
+  "description": "Better interface for Denver RTD Light Rail",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

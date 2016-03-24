@@ -1,0 +1,71 @@
+/**
+ * Site header
+ */
+.site-header {
+    border-top: 5px solid $grey-color-dark;
+    border-bottom: 1px solid $grey-color-light;
+    min-height: 56px;
+
+    // Positioning context for the mobile navigation icon
+    position: relative;
+}
+
+/**
+ * Page content
+ */
+.page-content {
+    padding: $spacing-unit 0;
+}
+
+.page-heading {
+    font-size: 20px;
+}
+
+
+.line {
+  p {
+    margin-bottom: 0px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  display: inline-block;
+  padding: 20px;
+  width: 40px;
+  text-align: center;
+  font-size: 27px;
+  border-radius: 10px;
+  background-color: grey;
+  color: white;
+  text-shadow: 2px 2px black;
+}
+
+.a-line {
+  background-color: #00ACED;
+}
+
+.c-line {
+  background-color: #DC8232;
+}
+
+.d-line {
+  background-color: #006E3C;
+}
+
+.e-line {
+  background-color: #552683;
+}
+
+
+.f-line {
+  background-color: #EE3E33;
+}
+
+.h-line {
+  background-color: #006DB2;
+}
+
+.w-line {
+  background-color: #009DAA;
+}
+
