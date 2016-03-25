@@ -15,6 +15,10 @@
  */
 .page-content {
     padding: $spacing-unit 0;
+    @include media-query($on-palm) {
+      padding: 0px;
+  }
+
 }
 
 .page-heading {
@@ -83,12 +87,20 @@
   font-family: 'Poiret One', Arial, sans-serif;
 }
 
-.active-direction {
-  color: black;
+.active-line-header {
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 0px;
 }
 
-.direction {
+.active-direction-header {
   font-size: 45px;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.active-day-header {
+  font-size: 30px;
   display: inline-block;
   margin-left: 20px;
 }
@@ -101,6 +113,7 @@
   width: 90%;
   display: block;
   margin: 20px auto;
+  margin-top: 0px;
   padding: 45px 0px;
   border-radius: 10px;
   font-size: 0.7em;

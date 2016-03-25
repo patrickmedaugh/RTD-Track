@@ -1,6 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var $ = require('jquery');
 
 var linesData = null;
 linesData = [{ name: 'a' }, { name: 'c' }, { name: 'd' }, { name: 'e' }, { name: 'f' }, { name: 'h' }, { name: 'w' }];
@@ -29,11 +28,20 @@ var LineList = React.createClass({
       React.createElement(
         'div',
         { className: "active-line line-" + this.state.activeLine + " " + this.state.activeLine + "-line" },
-        this.state.activeLine,
         React.createElement(
           'h1',
-          { className: 'direction' },
+          { className: 'active-line-header' },
+          this.state.activeLine
+        ),
+        React.createElement(
+          'h1',
+          { className: 'active-direction-header' },
           this.state.activeDirection
+        ),
+        React.createElement(
+          'h1',
+          { className: 'active-day-header' },
+          this.state.activeDay
         ),
         (() => {
           switch (this.state.activeDirection) {
@@ -62,13 +70,13 @@ var LineList = React.createClass({
                 ' ',
                 React.createElement(
                   'button',
-                  { className: 'weekday-button' },
+                  { className: 'weekday-button', onClick: this.setWeekday },
                   'Weekday'
                 ),
                 ' ',
                 React.createElement(
                   'button',
-                  { className: 'weekend-button' },
+                  { onClick: this.setWeekend, className: 'weekend-button' },
                   'Weekend'
                 ),
                 ' '
@@ -80,13 +88,13 @@ var LineList = React.createClass({
                 ' ',
                 React.createElement(
                   'button',
-                  { className: 'weekday-button' },
+                  { className: 'weekday-button', onClick: this.setWeekday },
                   'Weekday'
                 ),
                 ' ',
                 React.createElement(
                   'button',
-                  { className: 'weekend-button' },
+                  { onClick: this.setWeekend, className: 'weekend-button' },
                   'Weekend'
                 ),
                 ' '
@@ -98,13 +106,13 @@ var LineList = React.createClass({
                 ' ',
                 React.createElement(
                   'button',
-                  { className: 'weekday-button' },
+                  { className: 'weekday-button', onClick: this.setWeekday },
                   'Weekday'
                 ),
                 ' ',
                 React.createElement(
                   'button',
-                  { className: 'weekend-button' },
+                  { onClick: this.setWeekend, className: 'weekend-button' },
                   'Weekend'
                 ),
                 ' '
@@ -116,13 +124,13 @@ var LineList = React.createClass({
                 ' ',
                 React.createElement(
                   'button',
-                  { className: 'weekday-button' },
+                  { className: 'weekday-button', onClick: this.setWeekday },
                   'Weekday'
                 ),
                 ' ',
                 React.createElement(
                   'button',
-                  { className: 'weekend-button' },
+                  { onClick: this.setWeekend, className: 'weekend-button' },
                   'Weekend'
                 ),
                 ' '
@@ -138,6 +146,7 @@ var LineList = React.createClass({
   handleClick: function (line) {
     this.setState({ activeLine: line.name });
     this.setState({ activeDirection: null });
+    this.setState({ activeDay: null });
   },
 
   setNorth: function () {
@@ -154,6 +163,14 @@ var LineList = React.createClass({
 
   setWest: function () {
     this.setState({ activeDirection: 'west' });
+  },
+
+  setWeekday: function () {
+    this.setState({ activeDay: 'weekday' });
+  },
+
+  setWeekend: function () {
+    this.setState({ activeDay: 'weekend' });
   }
 
 });
