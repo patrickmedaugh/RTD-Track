@@ -128,6 +128,14 @@
   @extend .north-button;
 }
 
+.east-button {
+  @extend .north-button;
+}
+
+.west-button {
+  @extend .north-button;
+}
+
 .day-buttons {
   text-align:center;
 }

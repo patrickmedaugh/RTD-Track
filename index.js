@@ -44,25 +44,141 @@ var LineList = React.createClass({
           this.state.activeDay
         ),
         (() => {
+          if (this.state.activeDirection == null) {
+            switch (this.state.activeLine) {
+              case null:
+                return;
+              case "a":
+                return React.createElement(
+                  'div',
+                  { className: 'direction-buttons' },
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'east-button', onClick: this.setEast },
+                    'Eastbound'
+                  ),
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'west-button', onClick: this.setWest },
+                    'Westbound'
+                  ),
+                  ' '
+                );
+              case "c":
+                return React.createElement(
+                  'div',
+                  { className: 'direction-buttons' },
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'north-button', onClick: this.setNorth },
+                    'Northbound'
+                  ),
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'south-button', onClick: this.setSouth },
+                    'Southbound'
+                  ),
+                  ' '
+                );
+              case "d":
+                return React.createElement(
+                  'div',
+                  { className: 'direction-buttons' },
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'north-button', onClick: this.setNorth },
+                    'Northbound'
+                  ),
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'south-button', onClick: this.setSouth },
+                    'Southbound'
+                  ),
+                  ' '
+                );
+              case "e":
+                return React.createElement(
+                  'div',
+                  { className: 'direction-buttons' },
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'north-button', onClick: this.setNorth },
+                    'Northbound'
+                  ),
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'south-button', onClick: this.setSouth },
+                    'Southbound'
+                  ),
+                  ' '
+                );
+              case "f":
+                return React.createElement(
+                  'div',
+                  { className: 'direction-buttons' },
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'north-button', onClick: this.setNorth },
+                    'Northbound'
+                  ),
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'south-button', onClick: this.setSouth },
+                    'Southbound'
+                  ),
+                  ' '
+                );
+              case "h":
+                return React.createElement(
+                  'div',
+                  { className: 'direction-buttons' },
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'north-button', onClick: this.setNorth },
+                    'Northbound'
+                  ),
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'south-button', onClick: this.setSouth },
+                    'Southbound'
+                  ),
+                  ' '
+                );
+              case "w":
+                return React.createElement(
+                  'div',
+                  { className: 'direction-buttons' },
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'east-button', onClick: this.setEast },
+                    'Eastbound'
+                  ),
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'west-button', onClick: this.setWest },
+                    'Westbound'
+                  ),
+                  ' '
+                );
+              default:
+                return;
+            }
+          }
           switch (this.state.activeDirection) {
-            case null:
-              return React.createElement(
-                'div',
-                { className: 'direction-buttons' },
-                ' ',
-                React.createElement(
-                  'button',
-                  { className: 'north-button', onClick: this.setNorth },
-                  'Northbound'
-                ),
-                ' ',
-                React.createElement(
-                  'button',
-                  { className: 'south-button', onClick: this.setSouth },
-                  'Southbound'
-                ),
-                ' '
-              );
             case "north":
               return React.createElement(
                 'div',
