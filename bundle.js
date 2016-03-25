@@ -2,8 +2,53 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var linesData = null;
-linesData = [{ name: 'a' }, { name: 'c' }, { name: 'd' }, { name: 'e' }, { name: 'f' }, { name: 'h' }, { name: 'w' }];
+var getLine = function (line) {
+  linesData.filter(function (value) {
+    return value['name'] == line;
+  });
+};
+
+linesData = [{ 'name': 'a' }, { 'name': 'c', 'north': { 'weekday': { 'LittletonMineral': [null, null, null, "5:13 AM", null, null, "5:43 AM", null, "6:13 AM", "6:43 AM", "7:13 AM", "7:43 AM", "8:13 AM", "8:43 AM", "9:12 AM", "9:42 AM", "9:12 AM", "9:42 AM", "10:12 AM", "10:42 AM", "11:12 AM", "11:42 AM", "12:12 PM", "12:42 PM", "1:12 PM", "1:42 PM", "2:12 PM", null, null, "2:42 PM", null, null, "3:12 PM", null, "3:42 PM", "4:12 PM", "4:42 PM", "5:12 PM", "5:42 PM", "6:12 PM"],
+      'LittletonDowntown': [],
+      'Oxford': [],
+      'Englewood': [],
+      'Evans': [],
+      'Broadway': [],
+      'Alameda': [],
+      'TenthAndOsage': [],
+      'AurariaWest': [],
+      'SportsAuthorityMileHigh': [],
+      'PepsiCenterElitchGardens': [],
+      'Union': []
+    },
+    'weekend': { 'LittletonMineral': [null, null, null, "5:13 AM", null, null, "5:43 AM", null, "6:13 AM", "6:43 AM", "7:13 AM", "7:43 AM", "8:13 AM", "8:43 AM", "9:12 AM", "9:42 AM"],
+      'LittletonDowntown': [],
+      'Oxford': [],
+      'Englewood': [],
+      'Evans': [],
+      'Broadway': [],
+      'Alameda': [],
+      'TenthAndOsage': [],
+      'AurariaWest': [],
+      'SportsAuthorityMileHigh': [],
+      'PepsiCenterElitchGardens': [],
+      'Union': []
+    }
+  },
+  'southbound': { 'Union': [],
+    'PepsiCenterElitchGardens': [],
+    'SportsAuthorityMileHigh': [],
+    'AurariaWest': [],
+    'TenthAndOsage': [],
+    'Alameda': [],
+    'Broadway': [],
+    'Evans': [],
+    'Englewood': [],
+    'Oxford': [],
+    'LittletonDowntown': [],
+    'LittletonMineral': []
+  }
+}, { 'name': 'd' }, { 'name': 'e' }, { 'name': 'f' }, { 'name': 'h' }, { 'name': 'w' }];
 
 var LineList = React.createClass({
   displayName: 'LineList',
@@ -23,7 +68,7 @@ var LineList = React.createClass({
         'div',
         { className: 'line-select' },
         this.props.linesData.map(function (line, i) {
-          return React.createElement(Line, { line: line.name, key: i, onClick: this.handleClick.bind(this, line) });
+          return React.createElement(Line, { line: line['name'], key: i, onClick: this.handleClick.bind(this, line) });
         }.bind(this))
       ),
       React.createElement(
@@ -179,82 +224,97 @@ var LineList = React.createClass({
                 return;
             }
           }
-          switch (this.state.activeDirection) {
-            case "north":
-              return React.createElement(
-                'div',
-                { className: 'day-buttons' },
-                ' ',
-                React.createElement(
-                  'button',
-                  { className: 'weekday-button', onClick: this.setWeekday },
-                  'Weekday'
-                ),
-                ' ',
-                React.createElement(
-                  'button',
-                  { onClick: this.setWeekend, className: 'weekend-button' },
-                  'Weekend'
-                ),
-                ' '
-              );
-            case "south":
-              return React.createElement(
-                'div',
-                { className: 'day-buttons' },
-                ' ',
-                React.createElement(
-                  'button',
-                  { className: 'weekday-button', onClick: this.setWeekday },
-                  'Weekday'
-                ),
-                ' ',
-                React.createElement(
-                  'button',
-                  { onClick: this.setWeekend, className: 'weekend-button' },
-                  'Weekend'
-                ),
-                ' '
-              );
-            case "east":
-              return React.createElement(
-                'div',
-                { className: 'day-buttons' },
-                ' ',
-                React.createElement(
-                  'button',
-                  { className: 'weekday-button', onClick: this.setWeekday },
-                  'Weekday'
-                ),
-                ' ',
-                React.createElement(
-                  'button',
-                  { onClick: this.setWeekend, className: 'weekend-button' },
-                  'Weekend'
-                ),
-                ' '
-              );
-            case "west":
-              return React.createElement(
-                'div',
-                { className: 'day-buttons' },
-                ' ',
-                React.createElement(
-                  'button',
-                  { className: 'weekday-button', onClick: this.setWeekday },
-                  'Weekday'
-                ),
-                ' ',
-                React.createElement(
-                  'button',
-                  { onClick: this.setWeekend, className: 'weekend-button' },
-                  'Weekend'
-                ),
-                ' '
-              );
-            default:
-              return;
+          if (this.state.activeDay == null) {
+            switch (this.state.activeDirection) {
+              case "north":
+                return React.createElement(
+                  'div',
+                  { className: 'day-buttons' },
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'weekday-button', onClick: this.setWeekday },
+                    'Weekday'
+                  ),
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { onClick: this.setWeekend, className: 'weekend-button' },
+                    'Weekend'
+                  ),
+                  ' '
+                );
+              case "south":
+                return React.createElement(
+                  'div',
+                  { className: 'day-buttons' },
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'weekday-button', onClick: this.setWeekday },
+                    'Weekday'
+                  ),
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { onClick: this.setWeekend, className: 'weekend-button' },
+                    'Weekend'
+                  ),
+                  ' '
+                );
+              case "east":
+                return React.createElement(
+                  'div',
+                  { className: 'day-buttons' },
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'weekday-button', onClick: this.setWeekday },
+                    'Weekday'
+                  ),
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { onClick: this.setWeekend, className: 'weekend-button' },
+                    'Weekend'
+                  ),
+                  ' '
+                );
+              case "west":
+                return React.createElement(
+                  'div',
+                  { className: 'day-buttons' },
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { className: 'weekday-button', onClick: this.setWeekday },
+                    'Weekday'
+                  ),
+                  ' ',
+                  React.createElement(
+                    'button',
+                    { onClick: this.setWeekend, className: 'weekend-button' },
+                    'Weekend'
+                  ),
+                  ' '
+                );
+              default:
+                return;
+            }
           }
+          return React.createElement(
+            'div',
+            { className: 'test' },
+            'HI!!!! '
+          );
+          if (this.state.activeLine !== null && this.state.activeDirection !== null && this.state.activeDay !== null) {
+            return React.createElement(
+              'div',
+              { className: 'line-info' },
+              'HI!!!! ',
+              linesData.filter(getCLine).northbound.weekday
+            );
+          };
         })()
       )
     );

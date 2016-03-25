@@ -1,15 +1,61 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var linesData = null;
+var getLine = function (line) {
+  linesData.filter(function(value) {
+    return value['name'] == line;
+  })
+};
+
+
 linesData = [
-  {name: 'a'},
-  {name:'c'},
-  {name:'d'},
-  {name:'e'},
-  {name:'f'},
-  {name:'h'},
-  {name:'w'}
+  {'name': 'a'},
+  {'name':'c',  'north': {'weekday': {'LittletonMineral': [null, null, null, "5:13 AM", null, null, "5:43 AM", null, "6:13 AM", "6:43 AM", "7:13 AM", "7:43 AM", "8:13 AM", "8:43 AM", "9:12 AM", "9:42 AM",  "9:12 AM", "9:42 AM", "10:12 AM", "10:42 AM", "11:12 AM", "11:42 AM", "12:12 PM", "12:42 PM", "1:12 PM", "1:42 PM", "2:12 PM", null, null, "2:42 PM", null, null, "3:12 PM", null, "3:42 PM", "4:12 PM", "4:42 PM", "5:12 PM", "5:42 PM", "6:12 PM", ],
+                                    'LittletonDowntown': [],
+                                    'Oxford': [],
+                                    'Englewood': [],
+                                    'Evans': [],
+                                    'Broadway': [],
+                                    'Alameda': [],
+                                    'TenthAndOsage': [],
+                                    'AurariaWest': [],
+                                    'SportsAuthorityMileHigh': [],
+                                    'PepsiCenterElitchGardens': [],
+                                    'Union': [],
+                                   },
+                          'weekend': {'LittletonMineral': [null, null, null, "5:13 AM", null, null, "5:43 AM", null, "6:13 AM", "6:43 AM", "7:13 AM", "7:43 AM", "8:13 AM", "8:43 AM", "9:12 AM", "9:42 AM" ],
+                                    'LittletonDowntown': [],
+                                    'Oxford': [],
+                                    'Englewood': [],
+                                    'Evans': [],
+                                    'Broadway': [],
+                                    'Alameda': [],
+                                    'TenthAndOsage': [],
+                                    'AurariaWest': [],
+                                    'SportsAuthorityMileHigh': [],
+                                    'PepsiCenterElitchGardens': [],
+                                    'Union': [],
+                                    }
+                            },
+              'southbound': {'Union': [],
+                          'PepsiCenterElitchGardens': [],
+                          'SportsAuthorityMileHigh': [],
+                          'AurariaWest': [],
+                          'TenthAndOsage': [],
+                          'Alameda': [],
+                          'Broadway': [],
+                          'Evans': [],
+                          'Englewood': [],
+                          'Oxford': [],
+                          'LittletonDowntown': [],
+                          'LittletonMineral': [],
+                         },
+  },
+  {'name':'d'},
+  {'name':'e'},
+  {'name':'f'},
+  {'name':'h'},
+  {'name':'w'}
   ];
 
 var LineList = React.createClass({
@@ -26,7 +72,7 @@ var LineList = React.createClass({
         <div className='line-select'>
       {this.props.linesData.map(function(line, i) {
           return (
-            <Line line={line.name} key={i} onClick={this.handleClick.bind(this, line)} />
+            <Line line={line['name']} key={i} onClick={this.handleClick.bind(this, line)} />
           )
         }.bind(this))
       }
@@ -49,13 +95,19 @@ var LineList = React.createClass({
             default:     return ;
             }
           }
+          if (this.state.activeDay == null) {
           switch (this.state.activeDirection) {
-          case "north": return <div className="day-buttons"> <button className="weekday-button" onClick={this.setWeekday}>Weekday</button> <button onClick={this.setWeekend} className="weekend-button">Weekend</button> </div>;
-          case "south": return <div className="day-buttons"> <button className="weekday-button" onClick={this.setWeekday}>Weekday</button> <button onClick={this.setWeekend} className="weekend-button">Weekend</button> </div>;
-          case "east": return <div className="day-buttons"> <button className="weekday-button" onClick={this.setWeekday}>Weekday</button> <button onClick={this.setWeekend} className="weekend-button">Weekend</button> </div>;
-          case "west": return <div className="day-buttons"> <button className="weekday-button" onClick={this.setWeekday}>Weekday</button> <button onClick={this.setWeekend} className="weekend-button">Weekend</button> </div>;
-          default:     return ;
+            case "north": return <div className="day-buttons"> <button className="weekday-button" onClick={this.setWeekday}>Weekday</button> <button onClick={this.setWeekend} className="weekend-button">Weekend</button> </div>;
+            case "south": return <div className="day-buttons"> <button className="weekday-button" onClick={this.setWeekday}>Weekday</button> <button onClick={this.setWeekend} className="weekend-button">Weekend</button> </div>;
+            case "east": return <div className="day-buttons"> <button className="weekday-button" onClick={this.setWeekday}>Weekday</button> <button onClick={this.setWeekend} className="weekend-button">Weekend</button> </div>;
+            case "west": return <div className="day-buttons"> <button className="weekday-button" onClick={this.setWeekday}>Weekday</button> <button onClick={this.setWeekend} className="weekend-button">Weekend</button> </div>;
+            default:     return ;
+            }
           }
+          return <div className='test'>HI!!!! </div>
+          if (this.state.activeLine !== null && this.state.activeDirection !== null && this.state.activeDay !== null ) {
+              return <div className="line-info">HI!!!! {getLine('c')['north']['weekday']}</div>
+            };
           })()}
         </div>
      </div>
